@@ -1,0 +1,376 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Class 11 Maths Syllabus | MathMaster</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+<style>
+  body {
+    font-family: 'Poppins', sans-serif;
+    background: linear-gradient(135deg, #1e3c72 0%, #2a5298 100%);
+    color: #fff;
+    margin: 0;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  header {
+    background: rgba(255, 255, 255, 0.15);
+    padding: 30px 20px 50px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+    backdrop-filter: blur(10px);
+    border-radius: 0 0 20px 20px;
+    position: relative;
+  }
+
+  header h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+  }
+
+  header p {
+    font-size: 1.2rem;
+    color: #ddd;
+  }
+
+  /* Menu Icon */
+  .menu-icon {
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    font-size: 1.8rem;
+    color: #ffd700;
+    cursor: pointer;
+    z-index: 1100;
+    transition: transform 0.3s ease;
+  }
+
+  .menu-icon:hover {
+    transform: scale(1.1);
+  }
+
+  /* Sidebar */
+  .side-menu {
+    position: fixed;
+    top: 0;
+    left: -260px;
+    width: 260px;
+    height: 100%;
+    background: linear-gradient(160deg, rgba(255,255,255,0.15), rgba(0,0,0,0.3));
+    backdrop-filter: blur(20px);
+    box-shadow: 2px 0 15px rgba(0,0,0,0.6);
+    border-right: 2px solid rgba(255,255,255,0.2);
+    padding-top: 80px;
+    transition: left 0.3s ease;
+    z-index: 1000;
+  }
+
+  .side-menu.active {
+    left: 0;
+  }
+
+  .side-menu a {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 15px 25px;
+    color: #fff;
+    text-decoration: none;
+    font-size: 1.2rem;
+    font-weight: 500;
+    border-bottom: 1px solid rgba(255,255,255,0.1);
+    transition: all 0.3s ease;
+    text-shadow: 0 0 10px rgba(255,255,255,0.3);
+  }
+
+  .side-menu a:hover {
+    background: linear-gradient(to right, #ffd700, #ffae00);
+    color: #1e3c72;
+    padding-left: 35px;
+    text-shadow: none;
+    box-shadow: 0 0 15px rgba(255,215,0,0.6);
+  }
+
+  .side-menu a i {
+    font-size: 1.4rem;
+  }
+
+  /* Overlay */
+  .overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+    display: none;
+    z-index: 900;
+  }
+
+  .overlay.active {
+    display: block;
+  }
+
+  /* Search Bar */
+  .search-container {
+    position: relative;
+    max-width: 400px;
+    margin: 25px auto 0;
+  }
+
+  .search-container input {
+    width: 100%;
+    padding: 12px 45px;
+    border: none;
+    border-radius: 30px;
+    outline: none;
+    background: rgba(255,255,255,0.2);
+    color: #fff;
+    font-size: 1rem;
+    transition: all 0.4s ease;
+  }
+
+  .search-container input::placeholder {
+    color: #ddd;
+  }
+
+  .search-container i {
+    position: absolute;
+    left: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #ffd700;
+    transition: transform 0.3s ease;
+  }
+
+  .search-container input:focus + i {
+    transform: scale(1.2) translateY(-50%);
+  }
+
+  .search-container input:focus {
+    box-shadow: 0 0 15px #ffd700;
+    background: rgba(255,255,255,0.25);
+  }
+
+  /* Main Section */
+  main {
+    max-width: 1200px;
+    margin: 30px auto;
+    padding: 0 20px;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 25px;
+  }
+
+  .chapter-card {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+    padding: 25px 20px;
+    border-radius: 18px;
+    box-shadow: 0 6px 20px rgba(0,0,0,0.4);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    animation: fadeIn 0.8s ease;
+  }
+
+  .chapter-card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.6);
+  }
+
+  .chapter-card h2 {
+    margin: 0 0 12px 0;
+    font-size: 1.4rem;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .chapter-card p {
+    font-size: 0.95rem;
+    line-height: 1.4;
+  }
+
+  .chapter-card.hidden {
+    display: none;
+  }
+
+  .chapter-card a {
+    margin-top: 15px;
+    display: inline-block;
+    background: rgba(255, 255, 255, 0.15);
+    color: #fff;
+    padding: 10px 18px;
+    border-radius: 15px;
+    text-decoration: none;
+    text-align: center;
+    transition: background 0.3s ease, color 0.3s ease;
+  }
+
+  .chapter-card a:hover {
+    background: #fff;
+    color: #1e3c72;
+  }
+
+  @keyframes fadeIn {
+    from {opacity: 0; transform: translateY(15px);}
+    to {opacity: 1; transform: translateY(0);}
+  }
+
+  @media(max-width: 480px) {
+    header h1 { font-size: 2rem; }
+    main { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<div class="menu-icon"><i class="fas fa-bars"></i></div>
+
+<div class="side-menu" id="sideMenu">
+  <a href="main.html"><i class="fas fa-home"></i> Home</a>
+  <a href="class9.html"><i class="fas fa-book"></i> Class 9</a>
+  <a href="class10.html"><i class="fas fa-square-root-variable"></i> Class 10</a>
+  <a href="class11.html"><i class="fas fa-pen"></i> Class 11</a>
+  <a href="class12.html"><i class="fas fa-graduation-cap"></i> Class 12</a>
+</div>
+
+<div class="overlay" id="overlay"></div>
+
+<header>
+  <h1><i class="fas fa-calculator"></i> MathMaster</h1>
+  <p>CBSE Class 11 Maths - Chapter Overview (2025 Edition)</p>
+
+  <div class="search-container">
+    <input type="text" id="searchBar" placeholder="Search Chapter..." />
+    <i class="fas fa-search"></i>
+  </div>
+</header>
+
+<main id="chapterList">
+
+  <div class="chapter-card">
+    <h2><i class="fas fa-layer-group"></i> Sets</h2>
+    <p>Learn about sets, subsets, power sets, Venn diagrams, and operations on sets with examples.</p>
+    <a href="chapter1.html">View Exercises</a>
+  </div>
+
+  <div class="chapter-card">
+    <h2><i class="fas fa-link"></i> Relations and Functions</h2>
+    <p>Understand ordered pairs, Cartesian product of sets, types of relations, and kinds of functions.</p>
+    <a href="chapter2.html">View Exercises</a>
+  </div>
+
+  <div class="chapter-card">
+    <h2><i class="fas fa-wave-square"></i> Trigonometric Functions</h2>
+    <p>Explore trigonometric ratios and identities, their graphs, and the concept of periodicity.</p>
+    <a href="chapter3.html">View Exercises</a>
+  </div>
+
+  <div class="chapter-card">
+    <h2><i class="fas fa-infinity"></i> Complex Numbers and Quadratic Equations</h2>
+    <p>Study complex numbers, their representation, and finding roots of quadratic equations.</p>
+    <a href="chapter4.html">View Exercises</a>
+  </div>
+
+  <div class="chapter-card">
+    <h2><i class="fas fa-less-than-equal"></i> Linear Inequalities</h2>
+    <p>Learn linear inequalities in one or two variables and their graphical representation.</p>
+    <a href="chapter5.html">View Exercises</a>
+  </div>
+
+  <div class="chapter-card">
+    <h2><i class="fas fa-random"></i> Permutations and Combinations</h2>
+    <p>Understand the fundamental principles of counting, permutations, and combinations with examples.</p>
+    <a href="chapter6.html">View Exercises</a>
+  </div>
+
+  <div class="chapter-card">
+    <h2><i class="fas fa-layer-group"></i> Binomial Theorem</h2>
+    <p>Explore the binomial expansion and general term for positive integer exponents.</p>
+    <a href="chapter7.html">View Exercises</a>
+  </div>
+
+  <div class="chapter-card">
+    <h2><i class="fas fa-sort-numeric-up-alt"></i> Sequences and Series</h2>
+    <p>Study arithmetic and geometric progressions, nth term formulas, and sum of n terms.</p>
+    <a href="chapter8.html">View Exercises</a>
+  </div>
+
+  <div class="chapter-card">
+    <h2><i class="fas fa-ruler"></i> Straight Lines</h2>
+    <p>Learn slope, point-slope form, and different forms of equations of a line.</p>
+    <a href="chapter9.html">View Exercises</a>
+  </div>
+
+  <div class="chapter-card">
+    <h2><i class="fas fa-circle"></i> Conic Sections</h2>
+    <p>Understand the basic concepts of parabolas, ellipses, hyperbolas, and their equations.</p>
+    <a href="chapter10.html">View Exercises</a>
+  </div>
+
+  <div class="chapter-card">
+    <h2><i class="fas fa-cube"></i> Introduction to Three-Dimensional Geometry</h2>
+    <p>Learn direction cosines, coordinates of points, and distance between two points in 3D geometry.</p>
+    <a href="chapter11.html">View Exercises</a>
+  </div>
+
+  <div class="chapter-card">
+    <h2><i class="fas fa-wave"></i> Limits and Derivatives</h2>
+    <p>Study the concept of limits, derivatives of algebraic functions, and their use.</p>
+    <a href="chapter12.html">View Exercises</a>
+  </div>
+
+  <div class="chapter-card">
+    <h2><i class="fas fa-chart-bar"></i> Statistics</h2>
+    <p>Compute measures of dispersion, variance, and standard deviation of grouped data.</p>
+    <a href="chapter13.html">View Exercises</a>
+  </div>
+
+  <div class="chapter-card">
+    <h2><i class="fas fa-percentage"></i> Probability</h2>
+    <p>Understand the concept of probability, axiomatic approach, and simple events.</p>
+    <a href="chapter14.html">View Exercises</a>
+  </div>
+
+</main>
+
+<footer style="text-align:center; padding:20px; color:#ccc;">
+  © 2025 MathMaster | All Rights Reserved
+</footer>
+
+<script>
+  const searchBar = document.getElementById("searchBar");
+  const chapters = document.querySelectorAll(".chapter-card");
+  const menuIcon = document.querySelector(".menu-icon");
+  const sideMenu = document.getElementById("sideMenu");
+  const overlay = document.getElementById("overlay");
+
+  searchBar.addEventListener("input", e => {
+    const term = e.target.value.toLowerCase();
+    chapters.forEach(card => {
+      const title = card.querySelector("h2").innerText.toLowerCase();
+      if (title.includes(term)) {
+        card.classList.remove("hidden");
+      } else {
+        card.classList.add("hidden");
+      }
+    });
+  });
+
+  menuIcon.addEventListener("click", () => {
+    sideMenu.classList.toggle("active");
+    overlay.classList.toggle("active");
+  });
+
+  overlay.addEventListener("click", () => {
+    sideMenu.classList.remove("active");
+    overlay.classList.remove("active");
+  });
+</script>
+
+</body>
+</html>

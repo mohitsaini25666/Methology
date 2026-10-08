@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Chapter 3 - Pair of Linear Equations | Mathology</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+<style>
+body {
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle at center, #1e3c72 0%, #2a5298 40%, #3a61e3 100%);
+  background-size: 400% 400%;
+  animation: bgShift 30s ease infinite;
+  color:#eee; margin:0; min-height:100vh; overflow-x:hidden; position:relative;
+}
+@keyframes bgShift {0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+
+.math-operator {
+  position: fixed; color: rgba(255,255,255,0.07); font-weight:900; pointer-events:none;
+  user-select:none; z-index:-1; font-family:'Poppins',Arial,sans-serif; filter:blur(1px);
+  animation: floatPulse 6s ease-in-out infinite alternate;
+}
+@keyframes floatPulse{0%{transform:scale(1)}100%{transform:scale(1.05) translate(3px,-3px)}}
+.math-operator.op1{font-size:220px;top:12%;left:7%;}
+.math-operator.op2{font-size:180px;bottom:18%;left:25%;}
+.math-operator.op3{font-size:250px;top:42%;right:12%;}
+.math-operator.op4{font-size:155px;bottom:12%;right:17%;}
+.math-operator.op5{font-size:190px;top:65%;left:62%;}
+.math-operator.op6{font-size:165px;top:22%;right:37%;}
+.math-operator.op7{font-size:280px;top:30%;left:43%;}
+.math-operator.op8{font-size:135px;bottom:46%;right:25%;}
+.math-operator.op9{font-size:210px;top:78%;right:9%;}
+.math-operator.op10{font-size:180px;top:6%;right:37%;}
+
+.math-overlay {position:fixed;top:0;left:0;width:100%;height:100%;z-index:-1;pointer-events:none;}
+.symbol{position:absolute;color:rgba(255,255,255,0.2);font-size:2rem;animation:floatSway 25s linear infinite;}
+@keyframes floatSway{0%{transform:translateY(-10vh);opacity:0}15%{opacity:0.35}50%{transform:translateY(55vh)}85%{opacity:0.35}100%{transform:translateY(120vh);opacity:0}}
+
+header {
+  background: rgba(255,255,255,0.15); padding:25px 20px; text-align:center;
+  backdrop-filter: blur(10px); border-radius: 0 0 20px 20px; color:#fff;
+}
+.back-btn {
+  position:absolute; top:25px; left:25px; background:linear-gradient(135deg,#ffd700,#ffae00);
+  border:none; border-radius:30px; padding:10px 18px; color:#1e3c72; cursor:pointer;
+  box-shadow:0 0 15px rgba(255,215,0,0.85);
+}
+main { padding:30px 40px; max-width:900px; margin:auto; }
+.exercise-header {
+  background:rgba(240,234,234,0.05); border:2px solid #ffd700; border-radius:12px;
+  padding:15px 20px; font-size:1.3rem; margin-bottom:10px; color:#f4f6f8; cursor:pointer;
+  display:flex; justify-content:space-between; align-items:center;
+}
+.exercise-header:hover {background:#ffd700; color:#1e3c72;}
+.exercise-container {max-height:0; overflow:hidden; transition:max-height 0.5s ease;}
+.exercise-container.show {max-height:1200px;}
+ul.questions {list-style:none; padding:0; margin-top:10px;}
+ul.questions li {margin-bottom:15px;}
+ul.questions button {
+  background:rgba(240,234,234,0.05); border:2px solid #ffd700; border-radius:12px;
+  color:#e8ecef; padding:12px 20px; cursor:pointer; width:100%; text-align:left;
+}
+ul.questions button:hover {background:#ffd700; color:#1e3c72;}
+.video-player {margin-top:20px; display:none; text-align:center;}
+.video-player iframe {width:100%; height:400px; border-radius:12px; border:3px solid #ffd700;}
+footer {text-align:center; padding:20px; color:#bbb;}
+.rotate {transform:rotate(90deg);}
+</style>
+</head>
+<body>
+<div class="math-operator op1">∑</div><div class="math-operator op2">π</div><div class="math-operator op3">√</div>
+<div class="math-operator op4">∫</div><div class="math-operator op5">∆</div><div class="math-operator op6">θ</div>
+<div class="math-operator op7">∞</div><div class="math-operator op8">≥</div><div class="math-operator op9">÷</div><div class="math-operator op10">∂</div>
+<div class="math-overlay" id="mathOverlay"></div>
+
+<header>
+  <button class="back-btn" onclick="window.location.href='class10.html'"><i class="fas fa-arrow-left"></i> Back</button>
+  <h1>Mathology</h1>
+  <p>Chapter 3 - Pair of Linear Equations in Two Variables - Exercises</p>
+</header>
+
+<main>
+  <div class="exercise">
+    <div class="exercise-header" onclick="toggleExercise('ex3_1')">Exercise 3.1 <i class="fas fa-chevron-right arrow" id="arrow-ex3_1"></i></div>
+    <div class="exercise-container" id="ex3_1">
+      <ul class="questions">
+        <li><button data-video="https://www.youtube.com/embed/MdSPfyEtu3Q">1. Which of the following pairs of linear equations are consistent, inconsistent or dependent?<br>
+        (i) x + y = 2, 2x + 2y = 5<br>
+        (ii) 2x – 3y = 6, 4x – 6y = 12</button></li>
+        <li><button data-video="https://www.youtube.com/embed/HdQw6wYkuzs">2. Solve the following pair of linear equations by substitution:<br> x + y = 5, 2x – 3y = 4</button></li>
+        <li><button data-video="https://www.youtube.com/embed/vTcGykwtbpg">3. Solve the equations graphically:<br> 2x + 3y = 12, x – y = 1</button></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-header" onclick="toggleExercise('ex3_2')">Exercise 3.2 <i class="fas fa-chevron-right arrow" id="arrow-ex3_2"></i></div>
+    <div class="exercise-container" id="ex3_2">
+      <ul class="questions">
+        <li><button data-video="https://www.youtube.com/embed/h3-1bG2zQNM">1. Solve by elimination: 3x + 4y = 10, 2x – 2y = 2</button></li>
+        <li><button data-video="https://www.youtube.com/embed/4NnhcQYguVw">2. Solve by cross-multiplication: 7x – 2y = 3, 4x – 3y = 7</button></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="exercise">
+    <div class="exercise-header" onclick="toggleExercise('ex3_3')">Exercise 3.3 <i class="fas fa-chevron-right arrow" id="arrow-ex3_3"></i></div>
+    <div class="exercise-container" id="ex3_3">
+      <ul class="questions">
+        <li><button data-video="https://www.youtube.com/embed/2f-ej7oVeD4">1. A boat goes 30 km downstream and 44 km upstream in 10 hours. The speed of the boat in still water is 7 km/h. Find the speed of the current.</button></li>
+        <li><button data-video="https://www.youtube.com/embed/9KB1QHysq_w">2. Draw graphs of 2x + y = 8 and 3x – 2y = 7, and find their point of intersection graphically.</button></li>
+      </ul>
+    </div>
+  </div>
+</main>
+
+<div class="video-player" id="videoPlayer">
+  <button class="close-video" onclick="closeVideo()">×</button>
+  <iframe id="videoFrame" src="" frameborder="0" allowfullscreen></iframe>
+</div>
+
+<footer>&copy; 2025 Mathology | All Rights Reserved</footer>
+
+<script>
+function toggleExercise(id){
+ const el=document.getElementById(id);
+ const arrow=document.getElementById('arrow-'+id);
+ el.classList.toggle('show');
+ arrow.classList.toggle('rotate');
+}
+document.querySelectorAll('ul.questions button').forEach(b=>{
+ b.addEventListener('click',()=>{
+   const url=b.getAttribute('data-video');
+   document.getElementById('videoFrame').src=url+'?autoplay=1&rel=0';
+   document.getElementById('videoPlayer').style.display='block';
+   document.getElementById('videoPlayer').scrollIntoView({behavior: 'smooth', block: 'start'});
+ });
+});
+function closeVideo(){
+ const f=document.getElementById('videoFrame');
+ f.src=''; document.getElementById('videoPlayer').style.display='none';
+}
+window.addEventListener('load',()=>{
+ const overlay=document.getElementById('mathOverlay');
+ const symbols=['∑','π','√','∫','∆','θ','∞','Σ','≥','÷'];
+ for(let i=0;i<25;i++){
+   const s=document.createElement('span'); s.className='symbol';
+   s.textContent=symbols[Math.floor(Math.random()*symbols.length)];
+   s.style.left=Math.random()*100+'vw'; s.style.top=Math.random()*100+'vh';
+   s.style.animationDuration=(18+Math.random()*10)+'s'; overlay.appendChild(s);
+ }
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Assessment 2 | Mathology</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"/>
+<style>
+/* Full CSS as in your original snippet here */
+body {
+  font-family: 'Poppins', sans-serif;
+  background: radial-gradient(circle, #1e3c72 0%, #2a5298 40%, #3a61e3 100%);
+  background-size: 400% 400%;
+  animation: bgShift 25s ease infinite;
+  color: #fff;
+  margin: 0;
+  overflow-x: hidden;
+  min-height: 100vh;
+  position: relative;
+}
+@keyframes bgShift {
+  0% {background-position:0% 50%;}
+  50% {background-position:100% 50%;}
+  100% {background-position:0% 50%;}
+}
+.math-operator {
+  position: fixed;
+  color: rgba(255,255,255,0.08);
+  font-weight: bold;
+  pointer-events: none;
+  z-index: -1;
+  filter: blur(0.5px);
+}
+header {
+  background: rgba(255,255,255,0.15);
+  text-align: center;
+  padding: 35px 20px;
+  border-radius: 0 0 20px 20px;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  animation: headerDrop 1.3s cubic-bezier(.77,0,.175,1) forwards;
+  opacity: 0;
+}
+@keyframes headerDrop {
+  0%{transform:translateY(-40px);opacity:0;}
+  100%{transform:translateY(0);opacity:1;}
+}
+header h1 {
+  font-size: 2.8rem;
+  color: #ffd700;
+  margin: 0;
+}
+header p {
+  color: #ddd;
+  margin: 10px 0;
+}
+.back-btn {
+  position: absolute;
+  top: 25px;
+  left: 25px;
+  background: linear-gradient(135deg,#ffd700,#ffae00);
+  border: none;
+  border-radius: 30px;
+  padding: 10px 18px;
+  color: #1e3c72;
+  cursor: pointer;
+  box-shadow: 0 0 15px rgba(255,215,0,0.9);
+  transition: transform 0.3s ease;
+}
+.back-btn:hover {transform: scale(1.1);}
+main {
+  max-width: 1100px;
+  margin: 40px auto;
+  padding: 0 25px;
+  animation: fadeUp 1.5s cubic-bezier(.77,0,.175,1);
+}
+@keyframes fadeUp {
+  0%{opacity:0;transform:translateY(40px);}
+  100%{opacity:1;transform:translateY(0);}
+}
+.section {
+  margin-bottom: 25px;
+  background: linear-gradient(140deg, rgba(255,255,255,0.12), rgba(0,0,0,0.3));
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+  transition: transform 0.3s ease;
+}
+.section:hover {transform: scale(1.02);}
+.section h2 {
+  margin: 0;
+  padding: 20px;
+  font-size: 1.5rem;
+  background: rgba(255,215,0,0.2);
+  border-bottom: 2px solid rgba(255,215,0,0.4);
+  color: #ffde59;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.section h2 .difficulty {
+  font-style: italic;
+  font-size: 1rem;
+  color: #f0e68c;
+  margin-left: 12px;
+}
+.section i {
+  transition: transform .4s ease;
+}
+.rotate {
+  transform: rotate(90deg);
+}
+.question-list {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height .6s ease;
+  padding: 0 20px;
+}
+.question-list.show {
+  max-height: 3000px;
+  padding-bottom: 15px;
+}
+.question-card {
+  background: rgba(255,255,255,0.12);
+  border: 2px solid rgba(255,215,0,0.5);
+  border-radius: 15px;
+  padding: 15px 20px;
+  margin: 15px 0;
+  color: #f9f9f9;
+  line-height: 1.5;
+  transition: background .3s ease, transform .3s ease;
+  user-select: text;
+}
+.question-card:hover {
+  background: #ffd700;
+  color: #1e3c72;
+  transform: translateY(-3px);
+}
+.mcq-options label {
+  display: block;
+  margin-bottom: 8px;
+  color: #f9f9f9;
+  cursor: pointer;
+}
+.question-card:hover .mcq-options label {
+  color: #1e3c72;
+}
+.mcq-options input[type="radio"] {
+  margin-right: 8px;
+}
+.submit-btn {
+  background: linear-gradient(135deg,#ffd700,#ffae00);
+  border: none;
+  padding: 15px 30px;
+  border-radius: 30px;
+  color: #1e3c72;
+  font-size: 1.2rem;
+  cursor: pointer;
+  margin-top: 40px;
+  box-shadow: 0 0 15px rgba(255,215,0,0.85);
+}
+.submit-btn:hover {transform: scale(1.1);}
+footer {
+  text-align: center;
+  color: #ccc;
+  padding: 20px;
+  font-size: 0.9rem;
+  background: rgba(0,0,0,0.2);
+  border-top: 1px solid rgba(255,215,0,0.2);
+}
+.popup {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  background: rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(10px);
+  color: #1e3c72;
+  padding: 30px 50px;
+  border-radius: 15px;
+  box-shadow: 0 0 30px rgba(255,215,0,0.6);
+  text-align: center;
+  z-index: 1000;
+  display: none;
+  animation: pop 0.4s ease;
+  max-width: 90vw;
+  overflow-y: auto;
+  max-height: 80vh;
+  user-select:none;
+}
+@keyframes pop {
+  0% {
+    transform: translate(-50%,-50%) scale(0.7);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(-50%,-50%) scale(1);
+    opacity: 1;
+  }
+}
+.overlay {
+  position: fixed;
+  top: 0; 
+  left: 0;
+  width: 100%; 
+  height: 100%;
+  background: rgba(0,0,0,0.3);
+  display: none;
+  z-index: 999;
+  backdrop-filter: blur(4px);
+}
+.popup button {
+  background: #1e3c72;
+  color: #ffd700;
+  border: none;
+  padding: 10px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  margin-top: 15px;
+}
+.popup button:hover {
+  background: #ffd700;
+  color: #1e3c72;
+}
+</style>
+</head>
+<body>
+
+<div class="math-operator" style="font-size:220px;top:8%;left:5%;">∑</div>
+<div class="math-operator" style="font-size:180px;bottom:18%;left:25%;">π</div>
+<div class="math-operator" style="font-size:240px;top:40%;right:15%;">√</div>
+<div class="math-operator" style="font-size:200px;bottom:15%;right:20%;">∞</div>
+
+<header>
+ <button class="back-btn" onclick="window.location.href='class9.html'"><i class="fas fa-arrow-left"></i> Back</button>
+ <h1>Mathology Assessment 2</h1>
+ <p>Official Practice Test - Class 9 Mathematics (2025 Edition)</p>
+</header>
+
+<main id="assessmentForm">
+ <div class="section">
+   <h2 onclick="toggleSection('sec1')">Section 1: Number Systems <span class="difficulty">(Easy - 2 marks each)</span> <i class="fas fa-chevron-right" id="arrow-sec1"></i></h2>
+   <div class="question-list" id="sec1">
+     <div class="question-card" data-qid="1">
+       1. What is the next rational number after 2.2727...?
+       <div class="mcq-options">
+         <label><input type="radio" name="q1" value="3">3</label>
+         <label><input type="radio" name="q1" value="25/11">25/11</label>
+         <label><input type="radio" name="q1" value="2.25">2.25</label>
+         <label><input type="radio" name="q1" value="2.28">2.28</label>
+       </div>
+     </div>
+     <div class="question-card" data-qid="2">
+       2. The square root of which number is irrational?
+       <div class="mcq-options">
+         <label><input type="radio" name="q2" value="9">9</label>
+         <label><input type="radio" name="q2" value="4">4</label>
+         <label><input type="radio" name="q2" value="8">8</label>
+         <label><input type="radio" name="q2" value="16">16</label>
+       </div>
+     </div>
+     <div class="question-card" data-qid="3">
+       3. Which of the following is not a rational number?
+       <div class="mcq-options">
+         <label><input type="radio" name="q3" value="21/7">21/7</label>
+         <label><input type="radio" name="q3" value="√5">√5</label>
+         <label><input type="radio" name="q3" value="0.333...">0.333...</label>
+         <label><input type="radio" name="q3" value="0.75">0.75</label>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div class="section">
+   <h2 onclick="toggleSection('sec2')">Section 2:Algebra(Polynomials & Linear Equations) <span class="difficulty">(Medium - 3 marks each)</span> <i class="fas fa-chevron-right" id="arrow-sec2"></i></h2>
+   <div class="question-list" id="sec2">
+     <div class="question-card" data-qid="4">
+       4. Factorize x² - 9x + 20.
+       <div class="mcq-options">
+         <label><input type="radio" name="q4" value="(x-4)(x-5)">(x - 4)(x - 5)</label>
+         <label><input type="radio" name="q4" value="(x+4)(x-5)">(x + 4)(x - 5)</label>
+         <label><input type="radio" name="q4" value="(x-2)(x-10)">(x - 2)(x - 10)</label>
+         <label><input type="radio" name="q4" value="(x+2)(x+10)">(x + 2)(x + 10)</label>
+       </div>
+     </div>
+     <div class="question-card" data-qid="5">
+       5. Solve for x: 5x + 3 = 23
+       <div class="mcq-options">
+         <label><input type="radio" name="q5" value="4">4</label>
+         <label><input type="radio" name="q5" value="5">5</label>
+         <label><input type="radio" name="q5" value="6">6</label>
+         <label><input type="radio" name="q5" value="3">3</label>
+       </div>
+     </div>
+     <div class="question-card" data-qid="6">
+       6. The sum of zeros of x² - 7x + 10 is:
+       <div class="mcq-options">
+         <label><input type="radio" name="q6" value="7">7</label>
+         <label><input type="radio" name="q6" value="10">10</label>
+         <label><input type="radio" name="q6" value="-7">-7</label>
+         <label><input type="radio" name="q6" value="-10">-10</label>
+       </div>
+     </div>
+   </div>
+ </div>
+ <div class="section">
+   <h2 onclick="toggleSection('sec3')">Section 3: Lines and Angles <span class="difficulty">(Hard - 4 marks each)</span> <i class="fas fa-chevron-right" id="arrow-sec3"></i></h2>
+   <div class="question-list" id="sec3">
+     <div class="question-card" data-qid="7">
+       7. In two intersecting lines, vertically opposite angles are:
+       <div class="mcq-options">
+         <label><input type="radio" name="q7" value="Equal">Equal</label>
+         <label><input type="radio" name="q7" value="Not equal">Not equal</label>
+         <label><input type="radio" name="q7" value="Complementary">Complementary</label>
+         <label><input type="radio" name="q7" value="Supplementary">Supplementary</label>
+       </div>
+     </div>
+     <div class="question-card" data-qid="8">
+       8. When a transversal intersects two parallel lines, alternate interior angles are:
+       <div class="mcq-options">
+         <label><input type="radio" name="q8" value="Equal">Equal</label>
+         <label><input type="radio" name="q8" value="Not equal">Not equal</label>
+         <label><input type="radio" name="q8" value="Complementary">Complementary</label>
+         <label><input type="radio" name="q8" value="Supplementary">Supplementary</label>
+       </div>
+     </div>
+    
+     </div>
+   </div>
+ </div>
+
+ <div style="text-align:center;">
+  <button class="submit-btn" type="button" onclick="submitAssessment()">Submit Assessment</button>
+  <button class="submit-btn" type="button" onclick="window.location.href='9ans2.html'">Answer Sheet</button>
+</div>
+
+</main>
+
+<div class="overlay" id="overlay"></div>
+<div class="popup" id="popup">
+  <h3 id="popupText"></h3>
+  <button onclick="closePopup()">OK</button>
+</div>
+
+<footer>© 2025 Mathology | Official Assessment Portal</footer>
+
+<script>
+function toggleSection(id){
+  const section=document.getElementById(id);
+  const arrow=document.getElementById('arrow-'+id);
+  section.classList.toggle('show');
+  arrow.classList.toggle('rotate');
+}
+function showPopup(message, color){
+  const popup = document.getElementById('popup');
+  const text = document.getElementById('popupText');
+  const overlay = document.getElementById('overlay');
+  text.innerText = message;
+  text.style.color = color;
+  popup.style.display = 'block';
+  overlay.style.display = 'block';
+}
+function closePopup(){
+  document.getElementById('popup').style.display = 'none';
+  document.getElementById('overlay').style.display = 'none';
+}
+function submitAssessment(){
+  let allFilled = true;
+  const totalQuestions = 9;
+  for(let i = 1; i <= totalQuestions; i++){
+    let selected = document.querySelector('input[name="q'+i+'"]:checked');
+    if(!selected) allFilled = false;
+  }
+  if(!allFilled){
+    showPopup('Please answer all questions before submission!', 'red');
+    return;
+  }
+  showPopup('Your assessment has been submitted successfully!', '#1e3c72');
+  const allSelected = document.querySelectorAll('input[type="radio"]:checked');
+  allSelected.forEach(radio => radio.checked = false);
+  const sections = document.querySelectorAll('.question-list');
+  const arrows = document.querySelectorAll('.fas.fa-chevron-right');
+  sections.forEach(sec => sec.classList.remove('show'));
+  arrows.forEach(a => a.classList.remove('rotate'));
+}
+</script>
+
+</body>
+</html>
